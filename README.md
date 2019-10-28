@@ -2,7 +2,7 @@
 
 Recently, Google silently closed many security-related bugs in the `IndexedDB` module of the `Chrome` browser. `IndexedDB` is a database mechanism supported in modern browsers. This module is fairly complicated and in Chrome its logic is implemented in the Browser process and accessible from the Renderer process. Its accessibility from the Renderer makes it a good fit for a Sandbox Escape vector. In this post we discuss one of these bugs and demonstrate how to gain `PutBufferGetAddress` functionality from a compromised Renderer process to the Browser process. 
 
-This functionality basically means an attacker in control of the renderer process can send controlled data to the Browser and deduce its address in the Browser's memory. Thus bypassing `ASLR` mitigation and general randomness of the heap layout. This primitive assists an attacker to implement a full Sandbox-Escape exploit. We implement our exploit on Android Device with Chrome version 77 (All source code references are from tag `77.0.3865.129`).
+This functionality basically means an attacker in control of the Renderer process can send controlled data to the Browser and deduce its address in the Browser's memory. Thus bypassing `ASLR` mitigation and general randomness of the heap layout. This primitive assists an attacker to implement a full Sandbox-Escape exploit. We implement our exploit on Android Device with Chrome version 77 (All source code references are from tag `77.0.3865.129`).
 
 The fix for the issue presented below was merged in Chrome 78 version, released on October 22nd 2019. Therefore, users with updated Chrome version are not affected.
 
