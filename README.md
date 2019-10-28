@@ -96,7 +96,7 @@ struct BLINK_COMMON_EXPORT IndexedDBIndexMetadata {
   bool multi_entry;
 };
 ```
-Most of the fields in this struct are initialized to useless default values such as empty strings, but interestingly the integers are not initialized and retain their previous value. However, as the `id` field is saved also as a key, it is barely ever used, therefore actually turning this pathological state to something useful is rather tricky. One of the easier things to do though is to return this `id` to the Renderer by manipulating the Browser to pass the object store's metadata. Passing an uninitialized integer from one context to another is a very effective way to leak pointers and bypass ASLR mitigation. Therefore a tempting goal to achiecve.
+Most of the fields in this struct are initialized to useless default values such as empty strings, but interestingly the integers are not initialized and retain their previous value. However, as the `id` field is saved also as a key, it is barely ever used, therefore actually turning this pathological state to something useful is rather tricky. One of the easier things to do though is to return this `id` to the Renderer by manipulating the Browser to pass the object store's metadata. Passing an uninitialized integer from one context to another is a very effective way to leak pointers and bypass ASLR mitigation. Therefore a tempting goal to achieve.
  
 To use this primitive to our needs we want to coerce the Browser process to populate the memory with pointers to controlled data and then free it and let the `IndexedDBObjectStoreMetadata` occupy the same memory area. To do that we need to know the allocation size of that object in memory and understand the allocation mechanism.
 
