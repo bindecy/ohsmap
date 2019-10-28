@@ -10,7 +10,7 @@ The fix for the issue presented below was merged in Chrome 78 version, released 
 The bug we exploit is a rather classic example of Time-Of-Check-Time-Of-Use in the Chromium project (the open-source project Google Chrome is derived from). Recall that [synchronization in Chromium](https://chromium.googlesource.com/chromium/src/+/master/docs/threading_and_tasks.md) is based on the concept of `Task Runners` which execute short `Tasks`, i.e. function closures. Longer tasks, or such that require waiting some resources to become available, register a follow-up closure to be executed later. Our subject of investigation is a bug that occurs because some intermediate task changes the state of an object between that initial task and a later task.
 
 Without further ado, let's describe the bug, or rather, the **bugs**, as this pattern repeats in various functions in the same file.
-Examine the [`IndexedDBDatabase::Get`](https://chromium.googlesource.com/chromium/src/+/refs/tags/77.0.3865.129/content/browser/indexed_db/indexed_db_database.cc#1056) function:
+Examine [`IndexedDBDatabase::Get`](https://chromium.googlesource.com/chromium/src/+/refs/tags/77.0.3865.129/content/browser/indexed_db/indexed_db_database.cc#1056) function:
 ```
 void IndexedDBDatabase::Get(
     base::WeakPtr<IndexedDBDispatcherHost> dispatcher_host,
