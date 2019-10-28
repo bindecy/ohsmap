@@ -164,7 +164,7 @@ Status IndexedDBDatabase::GetAllOperation(
 The last operation allocates the uninitialized object. When the transaction is committed, the `SuccessDatabase` callback is called in the Renderer with the database's metadata, including the OS map (OH-Smap?) that contains the uninitialized values.
 
 ## Implementation
-Fortunately, implementing this exploit doesn't require writing native code or elaborate schemes. It can be implemented purely in JS. The only thing needed is to enable the Mojo JS bindings. This can be done by specifiying the `--enable-blink-features=MojoJS` flag when executing chrome or by using a JS RCE exploit. After the bindings are available we can implement our plan using the generated Mojo code.
+Fortunately, implementing this exploit doesn't require writing native code or elaborate schemes. It can be implemented purely in JS. The only thing needed is to enable the Mojo JS bindings. This can be done by specifying the `--enable-blink-features=MojoJS` flag when executing chrome or by using a JS RCE exploit. After the bindings are available we can implement our plan using the generated Mojo code.
 
 You can find the POC [in our Github repo](https://github.com/bindecy/ohsmap/blob/master/exploit.js).
 
