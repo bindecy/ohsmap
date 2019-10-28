@@ -1,4 +1,4 @@
-# OH-SMAP: Leaking Info from Chrome Browser
+# OH-SMAP: Leaking Info from Chrome Browser Process
 
 Recently, Google silently closed many security-related bugs in the `IndexedDB` module of the `Chrome` browser. `IndexedDB` is a database mechanism supported in modern browsers. This module is fairly complicated and in Chrome its logic is implemented in the Browser process and accessible from the Renderer process. Its accessibility from the Renderer makes it a good fit for a Sandbox Escape vector. In this post we discuss one of these bugs and demonstrate how to gain `PutBufferGetAddress` functionality from a compromised Renderer process to the Browser process. 
 
