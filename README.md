@@ -118,7 +118,7 @@ At this point, it's time to be more concrete, stop talking about Chromium in gen
 
 ```
 
-We can clearly see the `id` field is in offset 40 and the `max_index_id` field is in offset 80. So we need to find a struct that has pointers in the corresponding fields. Also, to complicate matters, this struct deallocaion should occur in the same thread and rather soon before the allocation of the uninitialized struct.
+We can clearly see the `id` field is in offset 40 and the `max_index_id` field is in offset 80. So we need to find a struct that has pointers in the corresponding fields. Also, to complicate matters, this struct deallocation should occur in the same thread and rather soon before the allocation of the uninitialized struct.
 After looking for a while, we found the perfect candidate, the `IndexedDBReturnValue` object:
 ```
 *** Dumping AST Record Layout
